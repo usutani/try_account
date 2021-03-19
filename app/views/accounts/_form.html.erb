@@ -11,10 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
+  <p>
+    <strong>Email:</strong>
+    <%= @account.email %>
+  </p>
+  <%= form.hidden_field :expiring_sid, value: @expiring_sid %>
 
   <div class="field">
     <%= form.label :password %>

@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action :set_expiring_sid_and_account_registration, only: %i[new create]
 
   # GET /accounts
   def index
@@ -13,6 +14,7 @@ class AccountsController < ApplicationController
   # GET /accounts/new
   def new
     @account = Account.new
+    @account.email = @account_registration.email
   end
 
   # GET /accounts/1/edit
@@ -22,11 +24,12 @@ class AccountsController < ApplicationController
   # POST /accounts
   def create
     @account = Account.new(account_params)
+    @account.email = @account_registration.email
 
     if @account.save
       redirect_to @account, notice: 'Account was successfully created.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -51,8 +54,14 @@ class AccountsController < ApplicationController
       @account = Account.find(params[:id])
     end
 
+    def set_expiring_sid_and_account_registration
+      @expiring_sid = params[:expiring_sid] || params[:account][:expiring_sid]
+      @account_registration = Account::Registration.find_signed(@expiring_sid, purpose: :registration)
+      head :unprocessable_entity if @account_registration.nil?
+    end
+
     # Only allow a list of trusted parameters through.
     def account_params
-      params.require(:account).permit(:email, :password, :password_confirmation)
+      params.require(:account).permit(:password, :password_confirmation)
     end
 end
