@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   namespace :account do
-    resources :registrations
+    resources :registrations, only: %i[show new create]
   end
-  resources :accounts
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :accounts, only: %i[show new create]
 end
