@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Account Registrations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @account_registrations.each do |account_registration| %>
+      <tr>
+        <td><%= account_registration.email %></td>
+        <td><%= link_to 'Show', account_registration %></td>
+        <td><%= link_to 'Edit', edit_account_registration_path(account_registration) %></td>
+        <td><%= link_to 'Destroy', account_registration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Account Registration', new_account_registration_path %>

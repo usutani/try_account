@@ -1,0 +1,22 @@
+<%= form_with(model: account_registration) do |form| %>
+  <% if account_registration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(account_registration.errors.count, "error") %> prohibited this account_registration from being saved:</h2>
+
+      <ul>
+        <% account_registration.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
