@@ -1,0 +1,2 @@
+<% expiring_sid = @account_registration.signed_id(expires_in: 1.hour, purpose: :registration) %>
+<%= new_account_url(expiring_sid: expiring_sid) %>

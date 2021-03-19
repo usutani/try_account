@@ -32,6 +32,9 @@ module TryAccount
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    # config.action_mailer.default_url_options = { host: 'example.com' }
+    config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
     # Don't generate system test files.
     config.generators.system_tests = nil
   end

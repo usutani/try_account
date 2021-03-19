@@ -24,8 +24,7 @@ class Account::RegistrationsController < ApplicationController
     @account_registration = Account::Registration.new(account_registration_params)
 
     if @account_registration.save
-      expiring_sid = @account_registration.signed_id(expires_in: 1.hour, purpose: :registration)
-      logger.info new_account_url(expiring_sid: expiring_sid)
+      Account::RegistrationMailer.with(account_registration: @account_registration).confirm.deliver_later
       redirect_to @account_registration, notice: 'Registration was successfully created.'
     else
       render :new, status: :unprocessable_entity
