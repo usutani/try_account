@@ -53,6 +53,6 @@ class Account::RegistrationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def account_registration_params
-      params.require(:account_registration).permit(:email)
+      params.require(:account_registration).permit(:email, :terms_of_service)
     end
 end
