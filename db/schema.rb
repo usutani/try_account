@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_19_095407) do
+ActiveRecord::Schema.define(version: 2021_03_21_022553) do
+
+  create_table "account_freezes", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_account_freezes_on_account_id"
+  end
 
   create_table "account_registrations", force: :cascade do |t|
     t.string "email"
@@ -26,4 +33,5 @@ ActiveRecord::Schema.define(version: 2021_03_19_095407) do
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 
+  add_foreign_key "account_freezes", "accounts"
 end
